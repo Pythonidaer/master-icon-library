@@ -137,3 +137,12 @@ Verification: production build, existing catalog and numeric sorting tests, and 
 Verification: regenerated complete catalog, production build, 22 regression tests including route parsing, style thresholds, source-style matching, topic matching, and bounded virtual windows. Browser interaction checks follow deployment; native iPhone Safari, touch dragging, and keyboard-open viewport behavior still require device review.
 
 Browser verification follow-up: live Chromium checks confirmed library refresh, persisted search, real Phosphor styles (1,533 names per weight), filtered counts, SVG clipboard export, preview backgrounds, and flip toggles. Return navigation was hardened to wait for the current route index and measured virtual grid, and stores the chip-collapse state with the position. Direct pointer navigation confirmed an exact 936px scroll offset before and after visiting Considerations; the automation locator otherwise auto-centers sticky controls and changes the position before clicking. Topic counts respect the chosen style, and style counts respect the chosen topic. Native Safari/swipe behavior remains unverified.
+
+
+## Search-only icon pages — 2026-10-16
+
+- User temporarily removed the Style and Topic pill filters, their styling, and the “Clear style and topic filters” action. Icon browsing and saved icons now expose only search, without collection chips either. Remove those filter states, predicates, session persistence, and scroll-collapse behavior, so old saved settings cannot silently restrict results.
+- Preserve homepage category chips and inspector preview-background choices. Native style metadata and the inspector's related-variant picker remain intact; this change removes browsing filters rather than catalog artwork or modification controls.
+- Move the icon-page divider from the toolbar bottom to the results count's top border: search, divider, “Showing x of y icons,” then tiles. Search/count remain sticky; virtualization, infinite scrolling, route persistence, and exports remain unchanged.
+
+Verification: production build, existing data/route/windowing regression checks, and published asset checks. Native mobile Safari spacing remains for device review.

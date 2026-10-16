@@ -38,13 +38,7 @@ main { max-width: 1500px; margin: auto; padding: 0 5%; }
 h1 { max-width: 100%; min-width: 0; font-size: clamp(32px, 4.2vw, 54px); line-height: 1.15; letter-spacing: -1.6px; font-weight: 500; margin-bottom: 0; overflow-wrap: break-word; }
 .description { font-size: 14px; line-height: 1.7; color: var(--muted); max-width: 560px; margin: 0; }
 .toolbar { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; border-bottom: 1px solid var(--line); padding: 0 0 10px; }
-.secondary-filters { min-width: 0; }
-.filter-group { min-width: 0; }
-.filter-group > span { display: block; margin: 6px 0 0; color: var(--muted); font-size: 11px; }
-.toolbar--sticky .secondary-filters { display: block; }
-.toolbar--sticky.filters-hidden .secondary-filters { display: none; }
-.toolbar--sticky.has-content { border-bottom-color: #657080; box-shadow: 0 5px 12px #0003; }
-.toolbar--sticky { position: sticky; top: 68px; z-index: 19; padding-top: 8px; background: #0e0f12; }
+.toolbar--sticky { position: sticky; top: 68px; z-index: 19; padding-top: 8px; background: #0e0f12; border-bottom: 0; }
 .filter-chips { display: flex; gap: 8px; min-width: 0; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; padding: 6px; margin-inline: -6px; }
 .filter-chips button { flex: 0 0 auto; min-height: 44px; padding: 8px 14px; border-radius: 999px; font-size: 13px; white-space: nowrap; }
 .filter-chips button[aria-pressed=true] { background: #25364b; color: #f4f6f8; border-color: #91b9ff; font-weight: 600; }
@@ -69,7 +63,7 @@ h1 { max-width: 100%; min-width: 0; font-size: clamp(32px, 4.2vw, 54px); line-he
 .svg svg { max-width: 100%; overflow: visible; }
 .ui-icon { display: inline-block; vertical-align: middle; flex-shrink: 0; }
 .icon-browser { overflow-anchor: none; }
-.browse-count { color: var(--muted); font-size: 12px; margin: 2px 0 0; line-height: 1.5; font-variant-numeric: tabular-nums; }
+.browse-count { color: var(--muted); font-size: 12px; margin: 10px 0 0; padding-top: 14px; border-top: 1px solid var(--line); line-height: 1.5; font-variant-numeric: tabular-nums; }
 .virtual-icons { margin-top: 12px; position: relative; overflow-anchor: none; }
 .tile-placeholder { display: block; width: 28px; height: 28px; flex: none; background: #343c48; }
 .icons { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 10px; }
