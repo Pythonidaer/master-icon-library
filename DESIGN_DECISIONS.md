@@ -109,3 +109,15 @@ Verification: production build, catalog/batch/export regression checks, and sour
 - Search and filter chips stay sticky immediately below the 68px site header. The opaque toolbar stays below header navigation and dialogs in the stacking order. A measured toolbar height provides scroll clearance for focused tiles. Loading placeholders use matching square geometry. Infinite scroll and complete icon coverage are preserved.
 
 Verification: production build, catalog/batch/export regression tests, source review, and text contrast calculations. Per-screen capacity depends on viewport and visible filter groups; 20–24 is not a verified device measurement. Safari sticky behavior, enlarged text, tile selection, and touch interaction still require device review.
+
+
+## Mobile considerations and quiet footer — 2026-10-15
+
+- Replace the approach comparison table with stacked cards, each naming what loads and when to use it. Mark direct React imports as the usual starting point and full-collection loading as avoid-by-default.
+- Order the page Approach, Steps, Sizes, then Sources; add jump-link chips. Lead with one brief whole-library-size callout. Avoid promising a fixed few-kB cost without measuring the selected artwork/build. Put technical definitions and transfer caveats in a collapsed “How we measure” disclosure.
+- Bold each step's actionable opening, brighten body copy to #C4CBD4, and tighten reading line-height to 1.55. Native details provides keyboard and disclosure semantics.
+- Use a two-column size table that fits phone width: library and selected measure, with numerical totals and decorative linear bars sharing the same maximum. Chips switch gzip estimate, raw bytes, and full-library requests. Separate name/value sort buttons toggle ascending/descending, backed by existing numeric sorting. Announce current column ordering through aria-sort and caption.
+- Source links have full-width 48px touch rows and the actual bundled Lucide external-link SVG. This is an explicit requested use of an external-link icon, not a Unicode substitute.
+- Make the footer total a quiet 13px line, with user-requested dot punctuation here and a small count qualification. Footer navigation adds Back to libraries and Considerations alongside GitHub and Icon sources, with a divider, 48px targets, and safe-area-aware bottom clearance.
+
+Verification: production build, existing catalog and numeric sorting tests, and source checks. Browser/mobile Safari wrapping, jump positions, disclosures, and touch geometry remain for device review.
