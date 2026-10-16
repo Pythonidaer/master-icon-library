@@ -146,3 +146,11 @@ Browser verification follow-up: live Chromium checks confirmed library refresh, 
 - Move the icon-page divider from the toolbar bottom to the results count's top border: search, divider, “Showing x of y icons,” then tiles. Search/count remain sticky; virtualization, infinite scrolling, route persistence, and exports remain unchanged.
 
 Verification: production build, existing data/route/windowing regression checks, and published asset checks. Native mobile Safari spacing remains for device review.
+
+
+## Match headings and result spacing — 2026-10-16
+
+- User selected the homepage heading size for library and saved-icon pages. Use the same intro and h1 rules at every breakpoint; remove the compact heading override and the repeated total beside the heading.
+- Library and icon results counts now share one typography/padding rule: 14px from the divider to the count line box, 10px from that line box to the tiles. Remove the icon grid's extra 12px margin and the sticky toolbar's duplicate bottom padding. Keep the icon-page divider above the results count.
+
+Verification: production build and source checks. Native Safari device review remains necessary for visual confirmation.
