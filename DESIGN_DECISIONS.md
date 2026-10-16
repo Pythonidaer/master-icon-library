@@ -86,3 +86,14 @@ Verification: production build, full source/catalog coverage and six-preview ass
 - Footer spacing stacks naturally on mobile and reserves extra clearance only when the comparison tray is active. Browser theme-color matches the dark canvas.
 
 Verification: production build and calculated foreground/background contrast checks. Deployment does not establish mobile Safari visual correctness; device review remains necessary.
+
+
+## Compact library rows and filter chips — 2026-10-15
+
+- User selected compact single-column white library rows at all widths. Put the name and adjacent category at the left, bold total at the right, six 32px previews in one strip, and one size line below. Remove set counts, dot separators, raw-size duplication, and the detached category eyebrow. Raw sizes remain in Considerations.
+- Label the single size line “gzipped estimate”; these build-time estimates are not measured network transfers. Keep the scope explanation in Considerations.
+- Search takes the full toolbar width. Categories use horizontally scrolling chips with one-tap filtering and aria-pressed state. Library/saved pages use the same component for collection and variant filters, retaining all existing options. Omit the collection group for single-source libraries and variant groups without options. Native selects remain only in the inspector where they configure artwork.
+- Chips use explicitly requested rounded geometry. Horizontal scrollers reserve focus-outline clearance, keep options in a single line, and let focused/selected options scroll into view. Selected chips use a white surface and bold text; library rows stay white through hover/press, with a stronger border instead of gray shading that resembles a disabled state.
+- Loading placeholders share the new row structure and six-preview strip. Menu, icon coverage, and automatic loading remain intact.
+
+Verification: production build, catalog/batch/export regression checks, and source review. Mobile Safari layout, chip scrolling, focus, and increased-text behavior still require device review.
