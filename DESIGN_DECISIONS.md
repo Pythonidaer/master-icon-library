@@ -163,3 +163,11 @@ Verification: production build and source checks. Native Safari device review re
 - Automatic loading had a restoration guard based on a ref. Clearing that ref did not itself restart the observer effect, leaving a possible inactive trigger after restoration. The explicit control no longer depends on this observer lifecycle.
 
 Verification: production build, existing route/data/windowing tests, and deployment checks. Native Safari layout and interaction remain for device review.
+
+
+## Search focus zoom sizing — 2026-10-16
+
+- Set both search inputs to 16px in the base rule at every viewport width, rather than 14px with a small-screen-only override. This also covers phones in landscape and wider mobile layouts. Placeholders explicitly inherit the input font, and the 44px control height remains unchanged.
+- Preserve the existing viewport configuration and user-controlled pinch zoom. The change targets Safari's small-input focus zoom through text sizing, without disabling zoom accessibility.
+
+Verification: production build and published CSS checks. Native iPhone focus/keyboard behavior still needs device confirmation.
