@@ -1,4 +1,4 @@
-export const defaults={size:48,color:'#20231e',background:'#f1f2eb',rotation:0,flipX:false,flipY:false,opacity:1,stroke:null,linecap:null,linejoin:null,duotone:null,padding:24,palette:{},zoom:1,offsetX:0,offsetY:0,motion:'none',duration:2,dash:0};
+export const defaults={size:48,color:'#202427',background:'#f1f3f5',rotation:0,flipX:false,flipY:false,opacity:1,stroke:null,linecap:null,linejoin:null,duotone:null,padding:24,palette:{},zoom:1,offsetX:0,offsetY:0,motion:'none',duration:2,dash:0};
 export function capabilities(icon){const body=icon?.body||'';return {stroke:/stroke[=\s]/.test(body),duotone:/opacity=/.test(body),colors:[...new Set(body.match(/#[0-9a-fA-F]{3,8}\b/g)||[])]};}
 export function customizeBody(icon,options){
  let body=icon.body;const c=capabilities(icon);

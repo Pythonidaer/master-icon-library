@@ -6,7 +6,7 @@ A minimal React reference for choosing icons for future projects. Start with a g
 
 - Select a library tile. Search by name, narrow to a source collection, and filter named native variants.
 - Every collection is complete for the exact dependency versions in `package-lock.json`. The first catalog contains **178,795 named icons, variants, and aliases** across 33 library tiles. Counts include alternate sizes, weights, styles, historical versions, and aliases; they are not counts of unique designs.
-- Browse 96 icons per page; jump directly to any page. Icons are generated locally and served with the site, with no live icon API dependency.
+- Browse 96 icons per page; jump directly to any page. Icons are generated locally and served with the site. Name indexes load for the selected library; only the SVG chunks needed for the current page are fetched. There is no live icon API dependency.
 - Select an icon to edit size, foreground, rotation, flips, opacity, scale, offsets, and animation. Genuine stroked SVGs expose width, cap, join, and dash controls. SVG palettes and secondary opacity appear when present. Native weights and filled styles are discrete variants, not simulated strokes on filled artwork.
 - Preview on any background. Copy SVG, JSX, or the icon identifier, or download a customized SVG. Background color stays in the preview.
 - Star icons to keep a shortlist in this browser. Compare up to four customized icons side by side.
@@ -39,9 +39,9 @@ npm test
 npm run dev
 ```
 
-Build once before the first dev session to generate `public/data/`. The data generator resolves all Iconify aliases and transforms, then adds the full Themify and original Devicons exports from React Icons. Vite outputs the static app to `dist/`.
+Build once before the first dev session to generate `public/data/`. The data generator resolves all Iconify aliases and transforms, then adds the full Themify and original Devicons exports from React Icons. It writes content-hashed name indexes and SVG chunks (up to 256 icons per chunk), with measured serialized JSON byte counts and build-time gzip estimates. Vite outputs the static app to `dist/`.
 
-Tests compare every included source collection count against the installed upstream data, validate every icon's dimensions, and check SVG transforms, JSX attribute conversion, palette edits, stroke handling, and native variant grouping. Codicons' intentionally blank icon is retained.
+Tests compare every included source collection name against the installed upstream data, verify chunk/index references and measured JSON/gzip sizes, validate every icon's dimensions, and check data fetching/cache/retry behavior, SVG transforms, JSX attribute conversion, palette edits, stroke handling, and native variant grouping. Codicons' intentionally blank icon is retained.
 
 GitHub Pages deployment is included. Enable **Settings → Pages → Source → GitHub Actions** if Pages is not already enabled. The relative Vite base works under `/master-icon-library/` and at a domain root.
 
@@ -54,3 +54,13 @@ GitHub Pages deployment is included. Enable **Settings → Pages → Source → 
 ## Verification
 
 Production build and automated checks run before publication. Browser visual QA was unavailable in the authoring environment; review layout and interactions on your phone and desktop.
+
+## Design and performance guidance
+
+- [WEBSITE_DESIGN_BASELINE.md](WEBSITE_DESIGN_BASELINE.md): full preserved baseline, version 1.2.
+- [PROJECT_DESIGN_ADDITIONS.md](PROJECT_DESIGN_ADDITIONS.md): no emojis or text-character UI icons.
+- [AGENTS.md](AGENTS.md): project instructions for future changes.
+- [DESIGN_DECISIONS.md](DESIGN_DECISIONS.md): applied decisions, scoped exceptions, and verification limits.
+- [LOADING_AND_BROWSING_OPTIONS.md](LOADING_AND_BROWSING_OPTIONS.md): loader alternatives and pagination, Load more, and infinite-scroll trade-offs.
+
+The homepage shows each library's full generated JSON size and gzip estimate. The Considerations page explains request patterns, tree shaking, local SVGs, runtime APIs, caching, and production measurement. These figures are neither npm package installation sizes nor the payload added when a production React app imports a few icons.
