@@ -76,3 +76,13 @@ Verification: source review and production build checks; mobile Safari appearanc
 - The grid is not virtualized in this iteration. Data requests remain chunked and cached, but mounted SVG tiles grow during very long browsing sessions; virtualization remains a future performance option rather than a claim about this implementation.
 
 Verification: production build, full source/catalog coverage and six-preview assertions, numeric sorting tests, preview fallback tests, and existing batch/cache/export checks. Browser/mobile Safari interaction testing is unavailable in this environment and remains for device review.
+
+## Dark canvas and footer — 2026-10-16
+
+- User selected the Musculoskeletal reference's darker background while keeping white tiles. Use its recorded #0E0F12 canvas, #16181C elevated surface, and #F4F6F8 foreground. Keep the existing typography, layout, and small interface radii.
+- Header remains frosted, using the same 78%/92% opacity and blur against the new dark canvas. The mobile dropdown remains opaque, now #16181C with light text. Menu geometry and behavior are unchanged.
+- White library/icon tiles, search fields, selectors, inspector, and comparison panels retain dark text and local light-surface color tokens. The theme does not recolor the icon artwork. Native controls on these surfaces use a light color scheme.
+- Simplify the footer to a prominent catalog-derived total and two plain links: GitHub and Icon sources. Remove repeated branding, tool names, and the build date. A small caption explains that the count includes variants and aliases. The total uses every library regardless of the active filter, not the displayed subset.
+- Footer spacing stacks naturally on mobile and reserves extra clearance only when the comparison tray is active. Browser theme-color matches the dark canvas.
+
+Verification: production build and calculated foreground/background contrast checks. Deployment does not establish mobile Safari visual correctness; device review remains necessary.
