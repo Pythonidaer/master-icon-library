@@ -25,7 +25,7 @@ function App(){
  function home(){setLibrary(null);setSavedOnly(false);setQuery('');setSet('all');setStyle('all');setPage(1)}
  function toggleSave(i){setFavorites(f=>f.some(x=>x.id===i.id)?f.filter(x=>x.id!==i.id):[...f,{id:i.id,name:i.name,prefix:i.prefix}])}
  function choose(i){setSelected(i);setOptions({...defaults,palette:{}})}
- function update(key,value){setOptions(x=>({...x,[key]:value}))}
+ function update(key,value){setOptions(x=>({...x,...(['linecap','linejoin'].includes(key)&&x.stroke===null?{stroke:Number(selected?.body.match(/stroke-width="([^"]+)"/)?.[1]||2)}:{}),[key]:value}))}
  async function copy(text){try{await navigator.clipboard.writeText(text);setNotice('Copied')}catch{setNotice('Clipboard unavailable. Use Download SVG.')}}
  function download(){const url=URL.createObjectURL(new Blob([svgMarkup(selected,options)],{type:'image/svg+xml'}));const a=document.createElement('a');a.href=url;a.download=selected.prefix+'-'+selected.name+'.svg';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
  const browsing=!!library||savedOnly;const caps=capabilities(selected);const related=selected?loaded.filter(x=>x.id!==selected.id&&baseName(x.name)===baseName(selected.name)):[];

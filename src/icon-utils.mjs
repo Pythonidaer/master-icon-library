@@ -16,7 +16,13 @@ export function svgMarkup(icon,options=defaults){
  if(animations[options.motion])body=`<g>${animations[options.motion]}${body}</g>`;
  return `<svg xmlns="http://www.w3.org/2000/svg" width="${options.size}" height="${options.size}" viewBox="0 0 ${w} ${h}" fill="currentColor" color="${options.color}"><g opacity="${options.opacity}" transform="translate(${w/2+(options.offsetX||0)} ${h/2+(options.offsetY||0)}) rotate(${options.rotation}) scale(${(options.flipX?-1:1)*(options.zoom||1)} ${(options.flipY?-1:1)*(options.zoom||1)}) translate(${-w/2} ${-h/2})">${body}</g></svg>`;
 }
-export function jsxMarkup(svg){return svg.replace(/class=/g,'className=').replace(/([\s])(stroke-width|stroke-linecap|stroke-linejoin|fill-rule|clip-rule|fill-opacity|stroke-opacity|clip-path|color-interpolation-filters|stop-color|stop-opacity|flood-color|flood-opacity)=/g,(_,space,key)=>space+key.replace(/-([a-z])/g,(_,x)=>x.toUpperCase())+'=');}
+export function jsxMarkup(svg){
+ return svg.replace(/class=/g,'className=').replace(/\s([a-zA-Z]+(?:[-:][a-zA-Z]+)+)=/g,(_,key)=>' '+(/^(aria|data)-/.test(key)?key:key.replace(/[-:]([a-z])/g,(_,x)=>x.toUpperCase()))+'=').replace(/style="([^"]*)"/g,(_,css)=>{
+  const entries=css.split(';').filter(Boolean).map(rule=>{const colon=rule.indexOf(':');return [rule.slice(0,colon).trim().replace(/-([a-z])/g,(_,x)=>x.toUpperCase()),rule.slice(colon+1).trim()]});
+  return `style={${JSON.stringify(Object.fromEntries(entries))}}`;
+ });
+}
+
 const variantWords=/^(?:thin|light|regular|bold|fill|filled|duotone|outline|outlined|solid|line|twotone|rounded|round|sharp|small|medium|large|mini|micro|baseline|[1-9]00|16|20|24|28|32|48)$/;
 export function variantTags(name){return name.split('-').filter(x=>variantWords.test(x));}
 export function baseName(name){return name.split('-').filter(x=>!variantWords.test(x)).join('-');}
