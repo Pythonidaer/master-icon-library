@@ -97,3 +97,15 @@ Verification: production build and calculated foreground/background contrast che
 - Loading placeholders share the new row structure and six-preview strip. Menu, icon coverage, and automatic loading remain intact.
 
 Verification: production build, catalog/batch/export regression checks, and source review. Mobile Safari layout, chip scrolling, focus, and increased-text behavior still require device review.
+
+
+## Dense individual icon views — 2026-10-15
+
+- Apply the user's four-column square layout to both library and saved-icon grids on mobile. Use six, eight, then ten columns as the viewport grows. Each tile has a 28px icon and an 11px single-line ellipsized name; full name and source remain accessible and visible in the detail sheet. Mixed-source grids include the source prefix in the same truncated label.
+- Replace white icon tiles with #1C2026 surfaces and light currentColor artwork. Preserve native fixed-color artwork, using a small light matte beneath such artwork so dark painted details remain readable. Homepage library rows remain white. Export and inspector defaults are unchanged.
+- Remove repeated favorite-star controls. Saving/removing is a labeled action in the inspector, and only saved tiles display a small filled dot. Empty-state instructions now describe this workflow.
+- Keep the last opened tile selected using an accent border, inset stroke, and faint tint after the sheet closes. Expose the current tile semantically and preserve keyboard focus indicators.
+- Reduce the library/saved heading to 24px, with the unfiltered icon total beside it, without dot separators. Keep displayed/filtered counts above the grid.
+- Search and filter chips stay sticky immediately below the 68px site header. The opaque toolbar stays below header navigation and dialogs in the stacking order. A measured toolbar height provides scroll clearance for focused tiles. Loading placeholders use matching square geometry. Infinite scroll and complete icon coverage are preserved.
+
+Verification: production build, catalog/batch/export regression tests, source review, and text contrast calculations. Per-screen capacity depends on viewport and visible filter groups; 20–24 is not a verified device measurement. Safari sticky behavior, enlarged text, tile selection, and touch interaction still require device review.
