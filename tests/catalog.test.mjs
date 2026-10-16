@@ -8,6 +8,7 @@ test('Every promised collection is present with its full generated icon count',a
  const required=['lucide','phosphor','tabler','heroicons','iconoir','font-awesome','ant-design','bootstrap','boxicons','circum','css-gg','feather','flat-color','octicons','grommet','icomoon','ionicons','line-awesome','material','radix','remix','simple-line','themify','typicons','vscode','simple-icons','devicons','game-icons','weather','carbon','fluent','unicons','iconpark'];
  assert.deepEqual(catalog.libraries.map(l=>l.id),required);
  for(const lib of catalog.libraries){
+  assert.equal(lib.samples.length,6);assert.equal(new Set(lib.samples.map(s=>s.body)).size,6);assert.ok(lib.samples.every(s=>s.body));
   let count=0,bytes=0,gzipBytes=0;
   for(const set of lib.sets){
    const indexRaw=await fs.readFile(`public/data/${set.indexFile}.json`);const index=JSON.parse(indexRaw);

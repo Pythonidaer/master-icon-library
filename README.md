@@ -6,7 +6,7 @@ A minimal React reference for choosing icons for future projects. Start with a g
 
 - Select a library tile. Search by name, narrow to a source collection, and filter named native variants.
 - Every collection is complete for the exact dependency versions in `package-lock.json`. The first catalog contains **178,795 named icons, variants, and aliases** across 33 library tiles. Counts include alternate sizes, weights, styles, historical versions, and aliases; they are not counts of unique designs.
-- Browse an initial 96 icons, then select Load more to append up to 96 at a time without returning to the top. Icons are generated locally and served with the site. Name indexes load for the selected library; only the SVG chunks needed for the requested batch are fetched. There is no live icon API dependency.
+- Browse an initial 96 icons; scrolling near the bottom automatically appends the next batch without returning to the top. A retry button appears after failures, and a keyboard-accessible manual fallback remains available. Icons are generated locally and served with the site. Name indexes load for the selected library; only the SVG chunks needed for the requested batch are fetched. There is no live icon API dependency.
 - Select an icon to edit size, foreground, rotation, flips, opacity, scale, offsets, and animation. Genuine stroked SVGs expose width, cap, join, and dash controls. SVG palettes and secondary opacity appear when present. Native weights and filled styles are discrete variants, not simulated strokes on filled artwork.
 - Preview on any background. Copy SVG, JSX, or the icon identifier, or download a customized SVG. Background color stays in the preview.
 - Star icons to keep a shortlist in this browser. Compare up to four customized icons side by side.
@@ -70,3 +70,9 @@ Production build and automated checks run before publication. Browser visual QA 
 - [LOADING_AND_BROWSING_OPTIONS.md](LOADING_AND_BROWSING_OPTIONS.md): loader alternatives and pagination, Load more, and infinite-scroll trade-offs.
 
 The homepage shows each library's full generated JSON size and gzip estimate. The Considerations page explains request patterns, tree shaking, local SVGs, runtime APIs, caching, and production measurement. These figures are neither npm package installation sizes nor the payload added when a production React app imports a few icons.
+
+## Catalog browsing updates
+
+The homepage displays the filtered library count below its filters. Every library tile shows six distinct preview SVGs; short preferred-icon matches are filled with additional valid icons. The Considerations size table sorts by name, raw JSON bytes, estimated gzip bytes, or total data requests; selecting the same column reverses direction.
+
+Infinite scrolling uses IntersectionObserver with a 240px preload margin. It requests one 96-icon batch at a time, pauses on error or while the inspector/comparison is open, and retains existing tiles during loading. It is not yet virtualized: tiles accumulate as you continue scrolling, so windowed rendering remains a possible improvement for very long browsing sessions.

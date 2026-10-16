@@ -1,6 +1,6 @@
 # Loading and browsing options
 
-Status: Load more is now implemented in batches of up to 96 icons. Static reserved-size skeletons remain in place; additional placeholders appear below existing results. Pagination and infinite scrolling are retained below as comparison options.
+Status: automatic infinite scrolling is now selected, in batches of up to 96 icons. Static placeholders appear below existing results during additional loads. Pagination and Load more remain below as comparison options.
 
 ## Loading screens
 
@@ -23,7 +23,7 @@ Yes: Previous, Next, and a page indicator such as “1 of 4” are pagination.
 | Infinite scrolling | Continuous visual browsing; can prefetch near the bottom with IntersectionObserver | Easy to lose position or overshoot; restoring history and keyboard focus takes care; the footer becomes hard to reach; memory and DOM size grow without limits. |
 | Hybrid | Automatically append the first few batches, then show Load more | Balances continuity and intentional loading but introduces an extra behavioral rule to explain. |
 
-Current choice: Load more is the selected alternative for this catalog. If continuous scrolling is preferred after testing, pair it with virtualization, saved scroll/filter position, a visible count, a retry control, and an accessible manual loading fallback. Virtualization means only nearby tiles remain mounted, rather than keeping thousands of SVGs in the DOM.
+Current choice: infinite scrolling is selected for the continuous browsing experience Johnny requested. Requests are serialized; errors pause auto-loading and show a retry action; manual loading remains keyboard-accessible. Tiles currently accumulate rather than being virtualized. If continuous scrolling is preferred after testing, pair it with virtualization, saved scroll/filter position, a visible count, a retry control, and an accessible manual loading fallback. Virtualization means only nearby tiles remain mounted, rather than keeping thousands of SVGs in the DOM.
 
 Fetching data and rendering tiles are separate costs. Changing to infinite scrolling alone does not reduce either cost. The current name-index/chunk approach already avoids full-library downloads and can support any of these browsing patterns.
 

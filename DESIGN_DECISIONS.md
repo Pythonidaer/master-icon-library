@@ -65,3 +65,14 @@ User screenshots showed competing title/count columns, repetitive introductory w
 - Consolidated the original toolbar rules rather than appending conflicting overrides. The approved header/menu source and its CSS are unchanged.
 
 Verification: source review and production build checks; mobile Safari appearance still requires device review. No icon catalog or loading behavior was changed.
+
+## Sortable sizes, consistent previews, and automatic scrolling — 2026-10-15
+
+- Library data sizes now sort by name, raw JSON bytes, gzip estimate, and total request count. Header buttons toggle ascending/descending order; aria-sort communicates the selected ordering. Sorting uses numeric byte counts, not rounded display strings, and leaves the source catalog unchanged.
+- Restore the filtered library count below the homepage toolbar, using the same section-meta area as the icon count on library pages. Keep the removed technical helper sentence out of that area.
+- The old preview picker accepted four or five common-name matches without filling the remainder. Replace it with a shared six-preview selector that skips blank SVGs and duplicate alias artwork, prefers comparable subjects, and fills remaining slots from valid collection icons. Full collection contents remain unchanged.
+- User selected infinite scrolling instead of Load more. A sentinel 240px below the viewport boundary triggers one next batch of up to 96 icons. In-flight guards prevent duplicate requests; previously displayed tiles remain mounted. Pause on failures and while the inspector or comparison is open. A visible retry action handles failure.
+- A manually activated fallback remains accessible to keyboard/screen-reader users, and visible for browsers without IntersectionObserver. Automatic scrolling does not take keyboard focus or reset the scroll position. Existing keyboard focus handling applies only to explicit manual activation.
+- The grid is not virtualized in this iteration. Data requests remain chunked and cached, but mounted SVG tiles grow during very long browsing sessions; virtualization remains a future performance option rather than a claim about this implementation.
+
+Verification: production build, full source/catalog coverage and six-preview assertions, numeric sorting tests, preview fallback tests, and existing batch/cache/export checks. Browser/mobile Safari interaction testing is unavailable in this environment and remains for device review.

@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import {selectSamples} from './catalog-samples.mjs';
 import {gzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
 import {getIconData, iconToSVG} from '@iconify/utils';
@@ -40,13 +41,13 @@ for(const [id,name,prefixes] of groups){
   }
   const keys=Object.keys(icons);total+=keys.length;
   const m=metadata[prefix];sets.push({prefix,name:m.name,count:keys.length,license:m.license,author:m.author,source:m.source,version:data.info?.version||null,...await writeSet(prefix,icons)});
-  if(!samples.length){const picked=['heart','star','home','house','search','settings','sun','camera'].map(q=>keys.find(k=>k===q)||keys.find(k=>k.startsWith(q+'-'))).filter(Boolean);samples=(picked.length>=4?picked:keys.slice(0,6)).slice(0,6).map(k=>({name:k,prefix,...icons[k]}));}
+  if(!samples.length)samples=selectSamples(icons,prefix);
  }
  if(id==='themify'||id==='devicons'){
   const source=id==='themify'?themify:devicons;const prefix=id==='themify'?'themify':'devicons-react';const icons={};
   for(const [key,component] of Object.entries(source)){if(!/^(Tfi|Di)[A-Z]/.test(key))continue;const svg=renderToStaticMarkup(createElement(component));const v=svg.match(/viewBox="([^"]+)"/)[1].split(' ').map(Number);icons[key]={body:svg.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,''),width:v[2],height:v[3]};}
   const count=Object.keys(icons).length;total+=count;sets.push({prefix,name:id==='themify'?'Themify Icons':'Devicons (React Icons)',count,license:{title:id==='themify'?'MIT':'MIT',url:'https://github.com/react-icons/react-icons'},source:{url:'https://react-icons.github.io/react-icons/'},...await writeSet(prefix,icons)});
-  if(!samples.length)samples=Object.entries(icons).slice(0,6).map(([name,x])=>({name,prefix,...x}));
+  if(!samples.length)samples=selectSamples(icons,prefix);
  }
  catalog.push({id,name,total,bytes:sets.reduce((n,s)=>n+s.bytes,0),gzipBytes:sets.reduce((n,s)=>n+s.gzipBytes,0),category:categories[id]||'Interface',sets,samples});
 }
