@@ -51,3 +51,17 @@ The new no-emojis rule applies to design and interface copy. All control glyphs 
 - Main tile styling and bullet separators remain unchanged while Johnny reviews alternatives.
 
 Verification at commit preparation: source review completed and regression tests added for retained SVG identity, append-only fetch planning, filter resets, and complete-batch ordering. The local execution environment is unavailable. GitHub Actions performs production build and tests; browser/mobile Safari verification remains pending.
+
+## Mobile toolbar and content cleanup — 2026-10-15
+
+User screenshots showed competing title/count columns, repetitive introductory wording, an oversized search field, and inconsistent spacing before the icon tiles.
+
+- Removed the home breadcrumb, introductory helper paragraphs, title-side counts, duplicate “33 collections” row, and the total-size explanation above the tiles. Size explanations remain on Considerations.
+- Use one page heading (“Icon libraries”, selected library name, or “Saved icons”). Retain one results count above the icon grid and the useful Load more count below it.
+- Removed the visible slash shortcut hint. The existing keyboard shortcut still works on desktop.
+- Search and toolbar selects share an explicit 44px height. Reset native search input padding/appearance so Safari does not add extra height. Use 16px mobile text to preserve readable controls without focus zoom.
+- Replace the homepage's clipped horizontal category tabs with a compact category dropdown. Place icon search above two aligned dropdowns on mobile; use aligned controls in one row when space permits. Collapse the home search/category pair on very narrow screens.
+- Remove repeated source prefixes beneath icons when the selected library has only one source collection. Retain prefixes for mixed-source grids and saved icons.
+- Consolidated the original toolbar rules rather than appending conflicting overrides. The approved header/menu source and its CSS are unchanged.
+
+Verification: source review and production build checks; mobile Safari appearance still requires device review. No icon catalog or loading behavior was changed.

@@ -28,25 +28,20 @@ h1, h2, p { margin-top: 0; }
 .active { background: var(--active); }
 .badge { display: inline-block; background: var(--active); padding: 2px 6px; margin-left: 7px; font-size: 11px; }
 main { max-width: 1500px; margin: auto; padding: 0 5%; }
-.breadcrumbs { display: flex; gap: 12px; align-items: center; font-size: 12px; color: var(--muted); margin-top: 22px; }
-.breadcrumbs button { padding: 0; border: 0; color: inherit; }
-.intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 25px; padding: 32px 0 40px; }
-h1 { font-size: clamp(32px, 4.2vw, 54px); line-height: 1.15; letter-spacing: -1.6px; font-weight: 500; margin-bottom: 18px; }
+.intro { min-width: 0; padding: 28px 0 20px; }
+h1 { max-width: 100%; min-width: 0; font-size: clamp(32px, 4.2vw, 54px); line-height: 1.15; letter-spacing: -1.6px; font-weight: 500; margin-bottom: 0; overflow-wrap: break-word; }
 .description { font-size: 14px; line-height: 1.7; color: var(--muted); max-width: 560px; margin: 0; }
-.intro-count { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; padding-bottom: 4px; }
-.intro-count strong { font-size: 35px; letter-spacing: -1px; font-weight: 500; }
-.intro-count span { font-size: 12px; color: var(--muted); }
-.toolbar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; border-block: 1px solid var(--line); padding: 18px 0; }
-.search { display: flex; align-items: center; gap: 9px; background: white; border: 1px solid var(--line); border-radius: var(--radius); min-width: 230px; flex: 1; max-width: 360px; padding: 10px 12px; }
-.search input { border: 0; background: transparent; width: 100%; min-width: 0; outline: none; font-size: 13px; }
+.toolbar { display: grid; align-items: end; gap: 12px; border-bottom: 1px solid var(--line); padding: 0 0 16px; }
+.toolbar--libraries { grid-template-columns: minmax(0, 1fr) 170px; }
+.toolbar--icons { grid-template-columns: minmax(0, 1fr) minmax(160px, 220px) minmax(140px, 180px); }
+.toolbar select { width: 100%; height: 44px; min-height: 44px; padding: 0 10px; font-size: 14px; line-height: 20px; }
+.search { display: flex; align-items: center; gap: 9px; height: 44px; min-width: 0; background: white; border: 1px solid var(--line); border-radius: var(--radius); padding: 0 12px; }
+.search input { display: block; box-sizing: border-box; appearance: none; -webkit-appearance: none; border: 0; background: transparent; width: 100%; min-width: 0; height: 100%; min-height: 0; margin: 0; padding: 0; outline: none; font-size: 14px; line-height: 20px; }
 .search:focus-within { outline: 2px solid var(--focus); outline-offset: 2px; }
-.search kbd { font-size: 11px; color: var(--muted); border: 1px solid var(--line); padding: 1px 5px; }
-.filters { display: flex; gap: 3px; flex-wrap: wrap; margin-left: auto; }
-.filters button { border: 0; font-size: 12px; padding: 9px 12px; }
-.select-label { display: flex; gap: 7px; align-items: center; font-size: 11px; color: var(--muted); }
-.section-meta { display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; font-size: 11px; color: var(--muted); padding: 24px 0 18px; line-height: 1.5; }
-.section-meta > span:last-child { max-width: 400px; text-align: right; }
-.libraries { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.select-label { display: block; min-width: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.section-meta { font-size: 12px; color: var(--muted); padding: 14px 0 10px; line-height: 1.5; }
+.libraries { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
 .library { text-align: left; background: white; padding: 24px; min-width: 0; min-height: 286px; }
 .library:hover { background: #f0f3f5; border-color: #8797a3; }
 .library-top { color: var(--muted); font-size: 10px; }
@@ -176,26 +171,18 @@ footer > span:first-child { font-weight: 600; color: #202427; }
 @media (max-width: 1100px) {
   .libraries { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .icons { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-  .filters { margin-left: 0; }
   .toolbar { gap: 12px; }
-  .search { max-width: none; }
 }
 @media (max-width: 650px) {
+  .intro { padding: 24px 0 18px; }
+  .toolbar--libraries { grid-template-columns: minmax(0, 1fr) 145px; }
+  .toolbar--icons { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .toolbar--icons .search { grid-column: 1 / -1; }
+  .toolbar select, .search input { font-size: 16px; }
   .brand { font-size: 17px; }
   main { padding: 0 6%; }
-  .intro { padding: 28px 0; gap: 15px; align-items: flex-start; }
   h1 { font-size: 34px; letter-spacing: -1.2px; }
   .description { font-size: 12px; line-height: 1.8; }
-  .intro-count { padding-top: 4px; }
-  .intro-count strong { font-size: 26px; }
-  .intro-count span { font-size: 10px; }
-  .toolbar { padding: 14px 0; }
-  .search { flex-basis: 100%; padding: 11px 12px; }
-  .search input { font-size: 16px; }
-  .filters { flex-wrap: nowrap; overflow: auto; width: 100%; padding: 4px; }
-  .filters button { white-space: nowrap; font-size: 11px; padding: 8px 10px; }
-  .section-meta { font-size: 10px; padding-top: 20px; }
-  .section-meta > span:last-child { max-width: 155px; }
   .libraries { gap: 10px; }
   .library { padding: 14px; min-height: 250px; }
   .library-top { font-size: 9px; }
@@ -206,8 +193,6 @@ footer > span:first-child { font-weight: 600; color: #202427; }
   .icons { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
   .icon-pick { padding-left: 5px; padding-right: 5px; }
   .icon-pick > span:not(.svg) { font-size: 9px; }
-  .select-label { flex: 1; min-width: 0; flex-direction: column; align-items: stretch; gap: 6px; }
-  .select-label select { width: 100%; }
   footer { flex-wrap: wrap; gap: 12px; font-size: 9px; margin-top: 35px; }
   footer > span:nth-child(2) { order: 3; width: 100%; }
   .inspector { width: 100%; padding: 22px 6%; }
@@ -226,4 +211,5 @@ footer > span:first-child { font-weight: 600; color: #202427; }
   .considerations p, .considerations li { font-size: 13px; }
   .considerations section { margin-top: 28px; }
 }
+@media (max-width: 380px) { .toolbar--libraries { grid-template-columns: minmax(0, 1fr); } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
