@@ -18,3 +18,7 @@ Read WEBSITE_DESIGN_BASELINE.md together with this file before editing. The full
 This site uses Lucide SVGs for its own controls, not Johnny UI. That is an intentional project-specific family choice; the preserved baseline scopes the Johnny UI default to Design Lab and Code Quality. Do not change the icon collections being browsed to match the interface family.
 
 Record design decisions and verification limits in DESIGN_DECISIONS.md.
+
+## Explicit navigation adaptation
+
+The user selected the design-practice dropdown for this project. Use its frosted sticky header, animated real-SVG hamburger, and solid mobile dropdown. The hamburger is an intentional exception to the saved Lucide control shapes; no emojis or text-character icon substitutes are allowed. Keep the dropdown opaque for readability. This component is a nonmodal disclosure, not the baseline's optional full-height drawer.

@@ -16,3 +16,13 @@ export async function resolveIcons(items,dataFile){
  return items.map(item=>{const icon=byFile.get(item.chunk)?.icons[item.name];if(!icon)throw Error('Icon not found. Reload the page to refresh the catalog.');return {...item,...icon}});
 }
 export function formatBytes(value){if(!Number.isFinite(value))return 'Unavailable';return value>=1_000_000?`${(value/1_000_000).toFixed(1)} MB`:`${Math.max(.1,value/1000).toFixed(1)} kB`;}
+
+// Preserve requested order and existing SVG objects when appending a batch.
+export function planIconBatch(requested,previous){
+ const known=new Map(previous.map(icon=>[icon.id,icon]));
+ return {retained:requested.filter(item=>known.has(item.id)).map(item=>known.get(item.id)),missing:requested.filter(item=>!known.has(item.id))};
+}
+export function mergeIconBatch(requested,retained,additional){
+ const known=new Map([...retained,...additional].map(icon=>[icon.id,icon]));
+ return requested.map(item=>{const icon=known.get(item.id);if(!icon)throw Error('The icon batch is incomplete. Please retry.');return icon});
+}

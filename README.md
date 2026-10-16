@@ -6,7 +6,7 @@ A minimal React reference for choosing icons for future projects. Start with a g
 
 - Select a library tile. Search by name, narrow to a source collection, and filter named native variants.
 - Every collection is complete for the exact dependency versions in `package-lock.json`. The first catalog contains **178,795 named icons, variants, and aliases** across 33 library tiles. Counts include alternate sizes, weights, styles, historical versions, and aliases; they are not counts of unique designs.
-- Browse 96 icons per page; jump directly to any page. Icons are generated locally and served with the site. Name indexes load for the selected library; only the SVG chunks needed for the current page are fetched. There is no live icon API dependency.
+- Browse an initial 96 icons, then select Load more to append up to 96 at a time without returning to the top. Icons are generated locally and served with the site. Name indexes load for the selected library; only the SVG chunks needed for the requested batch are fetched. There is no live icon API dependency.
 - Select an icon to edit size, foreground, rotation, flips, opacity, scale, offsets, and animation. Genuine stroked SVGs expose width, cap, join, and dash controls. SVG palettes and secondary opacity appear when present. Native weights and filled styles are discrete variants, not simulated strokes on filled artwork.
 - Preview on any background. Copy SVG, JSX, or the icon identifier, or download a customized SVG. Background color stays in the preview.
 - Star icons to keep a shortlist in this browser. Compare up to four customized icons side by side.
@@ -27,6 +27,12 @@ React Icons and Iconify are data/integration tools, not extra visual libraries, 
 - Each source collection's license and attribution link is shown inside the browser. Preserve the applicable upstream license/attribution when reusing icons. Brand usage can carry additional trademark restrictions.
 - Favorites are local to this browser and device. No account, database, or analytics.
 - Animation starts only when explicitly selected in the inspector. Exported SVGs include that animation.
+
+## Working source
+
+This repository is the primary working source. It contains the React app, full catalog generator, pinned dependencies, tests, and documentation from the last published ChatGPT preview, plus subsequent GitHub changes. The ChatGPT-hosted copy is a separate published snapshot and does not update automatically when this repository changes.
+
+Mobile navigation uses the design-practice hamburger disclosure: frosted sticky header, solid dropdown, and one shared desktop/mobile link list. Main tile separators remain unchanged pending design review.
 
 ## Development
 

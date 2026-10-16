@@ -38,3 +38,16 @@ Browser automation is unavailable in this environment. Source, build, and data c
 The baseline's Johnny UI default applies to Design Lab and Code Quality. This new icon-reference project deliberately uses Lucide for its own controls while retaining every collection's original artwork in the catalog. Shore's Helvetica choice, square Contact button, reference dropdown, and reveal animations are not automatically copied as mandatory components here.
 
 The new no-emojis rule applies to design and interface copy. All control glyphs are real SVGs or clear text. The icon catalog can still show SVG artwork supplied by its original libraries.
+
+## Load more and reference navigation — 2026-10-15
+
+- GitHub is now the primary working source, as requested. The last published ChatGPT-hosted source was already synchronized into this repository before these changes. Updating GitHub does not automatically update that separately hosted copy.
+- Replaced Previous/Next pagination with Load more. The initial batch is 96 icons; each request adds up to 96 more. Existing SVGs stay mounted while new chunks load. Append failures preserve existing tiles and offer retry. Query, collection, variant, and library changes reset the batch limit.
+- Show the number of displayed icons and the filtered total. Loading placeholders are appended below existing tiles instead of replacing the entire grid. Pointer activation preserves browsing position; keyboard activation moves focus to the first newly added icon once ready.
+- Adapted the actual design-practice navigation from commit 2a050335fac6cd3b191e1f6510df823f3143736b. Use a 68px sticky header, 14px blur, 160% saturation, 78% background opacity increasing to 92% after 8px scroll, and a subtle scrolled border.
+- At 1080px and below, a circular hamburger toggle opens one full-width dropdown below the header. The header is frosted; the dropdown stays solid white, matching the reference's readability correction. No backdrop, focus trap, or page scroll lock.
+- The 44px toggle is a touch-size adaptation of the reference's circular control. Its real SVG lines animate to an X over 250ms; the dropdown fades and rises 8px over 220ms. This explicitly selected reference hamburger is an exception to the saved Lucide control family; it introduces no emojis or character icons.
+- Closed mobile links are inert and hidden from assistive technology. Escape returns focus to the toggle; selecting a destination closes the dropdown; outside pointer/focus and breakpoint changes close it. Reduced-motion preferences remove the transitions. Desktop retains the same horizontal navigation list.
+- Main tile styling and bullet separators remain unchanged while Johnny reviews alternatives.
+
+Verification at commit preparation: source review completed and regression tests added for retained SVG identity, append-only fetch planning, filter resets, and complete-batch ordering. The local execution environment is unavailable. GitHub Actions performs production build and tests; browser/mobile Safari verification remains pending.
