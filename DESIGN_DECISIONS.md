@@ -154,3 +154,12 @@ Verification: production build, existing data/route/windowing regression checks,
 - Library and icon results counts now share one typography/padding rule: 14px from the divider to the count line box, 10px from that line box to the tiles. Remove the icon grid's extra 12px margin and the sticky toolbar's duplicate bottom padding. Keep the icon-page divider above the results count.
 
 Verification: production build and source checks. Native Safari device review remains necessary for visual confirmation.
+
+
+## Equal heading gap and explicit Load more — 2026-10-16
+
+- The sticky icon toolbar retained 8px of top padding beyond the homepage toolbar. Remove it so heading-to-search spacing uses the same intro rules and toolbar top padding on both pages.
+- User selected a visible Load more button again. Remove the IntersectionObserver sentinel and automatic-load effect; keep 96-item increments, virtualized rendering, the showing/total count, and visible retry behavior. Remove the obsolete visually hidden-button focus override and rename the loader styles for the explicit control.
+- Automatic loading had a restoration guard based on a ref. Clearing that ref did not itself restart the observer effect, leaving a possible inactive trigger after restoration. The explicit control no longer depends on this observer lifecycle.
+
+Verification: production build, existing route/data/windowing tests, and deployment checks. Native Safari layout and interaction remain for device review.
