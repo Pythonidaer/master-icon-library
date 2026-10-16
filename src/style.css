@@ -35,7 +35,7 @@ main { max-width: 1500px; margin: auto; padding: 0 5%; }
 h1 { max-width: 100%; min-width: 0; font-size: clamp(32px, 4.2vw, 54px); line-height: 1.15; letter-spacing: -1.6px; font-weight: 500; margin-bottom: 0; overflow-wrap: break-word; }
 .description { font-size: 14px; line-height: 1.7; color: var(--muted); max-width: 560px; margin: 0; }
 .toolbar { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; border-bottom: 1px solid var(--line); padding: 0 0 10px; }
-.toolbar--sticky { position: sticky; top: 68px; z-index: 19; padding-top: 0; padding-bottom: 0; background: #0e0f12; border-bottom: 0; }
+.toolbar--icons { padding-bottom: 0; border-bottom: 0; }
 .filter-chips { display: flex; gap: 8px; min-width: 0; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; padding: 6px; margin-inline: -6px; }
 .filter-chips button { flex: 0 0 auto; min-height: 44px; padding: 8px 14px; border-radius: 999px; font-size: 13px; white-space: nowrap; }
 .filter-chips button[aria-pressed=true] { background: #25364b; color: #f4f6f8; border-color: #91b9ff; font-weight: 600; }
@@ -68,7 +68,7 @@ h1 { max-width: 100%; min-width: 0; font-size: clamp(32px, 4.2vw, 54px); line-he
 .icon-cell { position: relative; background: #1c2026; border: 1px solid #3d4551; border-radius: var(--radius); min-width: 0; color: #f4f6f8; }
 .icon-cell:hover { background: #222832; border-color: #91b9ff; }
 .icon-cell.is-selected { background: #25364b; border-color: #91b9ff; box-shadow: inset 0 0 0 1px #91b9ff; }
-.icon-pick { scroll-margin-top: calc(80px + var(--filter-height, 160px)); border: 0; width: 100%; aspect-ratio: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px; gap: 4px; position: relative; }
+.icon-pick { scroll-margin-top: 80px; border: 0; width: 100%; aspect-ratio: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px; gap: 4px; position: relative; }
 .icon-pick:hover { background: transparent; }
 .icon-pick:focus-visible { outline-offset: 2px; }
 .icon-art { display: flex; width: 32px; height: 32px; flex: none; align-items: center; justify-content: center; }

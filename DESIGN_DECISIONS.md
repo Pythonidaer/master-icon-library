@@ -171,3 +171,11 @@ Verification: production build, existing route/data/windowing tests, and deploym
 - Preserve the existing viewport configuration and user-controlled pinch zoom. The change targets Safari's small-input focus zoom through text sizing, without disabling zoom accessibility.
 
 Verification: production build and published CSS checks. Native iPhone focus/keyboard behavior still needs device confirmation.
+
+
+## Nonsticky icon search and count — 2026-10-16
+
+- User temporarily removed sticky positioning from the icon search and showing/total count. Both now scroll normally with the heading and grid. Preserve the divider, count spacing, 16px input text, header navigation, and Load more.
+- Remove the obsolete toolbar-height observer and grid-layout event; keyboard tile focus now reserves only the header clearance rather than a nonexistent pinned filter area.
+
+Verification: production build and deployment checks. Native iPhone appearance remains for device review.
