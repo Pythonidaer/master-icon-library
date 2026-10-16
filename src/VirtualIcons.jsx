@@ -1,10 +1,12 @@
 import React,{useEffect,useRef,useState,useMemo} from 'react';
 import {gridWindow} from './browse-model.mjs';
 import {resolveIcons} from './data-client.mjs';
-export function VirtualIcons({items,renderIcon,dataFile,retry,onError,activeId,onChoose,saved,mixed,paused}){
+export function VirtualIcons({items,renderIcon,dataFile,retry,onError,activeId,onChoose,saved,mixed,paused,onReady}){
  const root=useRef(null);const [geometry,setGeometry]=useState({columns:4,size:80,top:0,scroll:0,height:800});
+ const [measured,setMeasured]=useState(false);
  const [icons,setIcons]=useState(new Map()),[busy,setBusy]=useState(false);const [focusIndex,setFocusIndex]=useState(null);
- useEffect(()=>{let frame;const measure=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{const el=root.current;if(!el)return;const w=el.clientWidth;const vw=window.innerWidth;const columns=vw<=650?4:vw<=850?6:vw<=1100?8:10;setGeometry({columns,size:(w-8*(columns-1))/columns,top:el.getBoundingClientRect().top+window.scrollY,scroll:window.scrollY,height:window.innerHeight})})};measure();const observer=new ResizeObserver(measure);observer.observe(root.current);window.addEventListener('scroll',measure,{passive:true});window.addEventListener('resize',measure);window.addEventListener('icon-grid-layout',measure);return()=>{cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('scroll',measure);window.removeEventListener('resize',measure);window.removeEventListener('icon-grid-layout',measure)}},[]);
+ useEffect(()=>{let frame;const measure=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{const el=root.current;if(!el)return;const w=el.clientWidth;const vw=window.innerWidth;const columns=vw<=650?4:vw<=850?6:vw<=1100?8:10;setGeometry({columns,size:(w-8*(columns-1))/columns,top:el.getBoundingClientRect().top+window.scrollY,scroll:window.scrollY,height:window.innerHeight});setMeasured(true)})};measure();const observer=new ResizeObserver(measure);observer.observe(root.current);window.addEventListener('scroll',measure,{passive:true});window.addEventListener('resize',measure);window.addEventListener('icon-grid-layout',measure);return()=>{cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('scroll',measure);window.removeEventListener('resize',measure);window.removeEventListener('icon-grid-layout',measure)}},[]);
+ useEffect(()=>{if(measured)onReady?.()},[measured,onReady,items.length]);
  const range=gridWindow({count:items.length,...geometry});
  // Retain a focused tile separately so keyboard focus survives windowing.
  const indices=useMemo(()=>{const list=Array.from({length:range.end-range.start},(_,i)=>range.start+i);if(focusIndex!==null&&focusIndex<items.length&&!list.includes(focusIndex))list.push(focusIndex);return list.sort((a,b)=>a-b)},[range.start,range.end,focusIndex,items.length]);
