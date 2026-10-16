@@ -1,4 +1,8 @@
 import fs from 'node:fs/promises';
+import {nativeStyle,iconTopics} from '../src/browse-model.mjs';
+import * as lucideReact from 'react-icons/lu';
+import * as phosphorReact from 'react-icons/pi';
+import * as tablerReact from 'react-icons/tb';
 import {selectSamples} from './catalog-samples.mjs';
 import {gzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
@@ -17,14 +21,17 @@ const groups=[
 const categories={ 'simple-icons':'Brands',devicons:'Development',vscode:'Development','game-icons':'Specialized',weather:'Specialized','flat-color':'Multicolor'};
 await fs.rm('public/data',{recursive:true,force:true});
 await fs.mkdir('public/data',{recursive:true});let catalog=[];
-async function writeSet(prefix,icons){
+async function writeSet(prefix,icons,data={}){
+ const categories=new Map();for(const [topic,names] of Object.entries(data.categories||{}))for(const name of names)categories.set(name,[...(categories.get(name)||[]),topic]);
+ const react=prefix==='lucide'?[lucideReact,'Lu','lu']:prefix==='ph'?[phosphorReact,'Pi','pi']:prefix==='tabler'?[tablerReact,'Tb','tb']:null;
+ function details(name){const original=data.aliases?.[name]?.parent||name;const result={style:nativeStyle(prefix,name,data.suffixes),topics:iconTopics(name,categories.get(name)||categories.get(original)||[])};if(react){const exportName=react[1]+name.split('-').map(s=>s.charAt(0).toUpperCase()+s.slice(1)).join('');if(exportName in react[0]){result.importName=exportName;result.importPath='react-icons/'+react[2]}}return result}
  const entries=Object.entries(icons);const chunkSize=256;const index=[];let bytes=0,gzipBytes=0;const chunks=[];
  for(let start=0;start<entries.length;start+=chunkSize){
   const slice=entries.slice(start,start+chunkSize);const json=JSON.stringify({prefix,icons:Object.fromEntries(slice)});
   const hash=createHash('sha256').update(json).digest('hex').slice(0,12);const file=`${prefix}-${start/chunkSize}-${hash}`;
   const raw=Buffer.byteLength(json),gz=gzipSync(json).length;bytes+=raw;gzipBytes+=gz;chunks.push({file,bytes:raw,gzipBytes:gz,count:slice.length});
   await fs.writeFile(`public/data/${file}.json`,json);
-  index.push(...slice.map(([name])=>({name,chunk:file})));
+  index.push(...slice.map(([name])=>({name,chunk:file,...details(name)})));
  }
  const json=JSON.stringify({prefix,icons:index});const indexBytes=Buffer.byteLength(json);const indexGzipBytes=gzipSync(json).length;
  const indexFile=`${prefix}-index-${createHash('sha256').update(json).digest('hex').slice(0,12)}`;
@@ -40,7 +47,7 @@ for(const [id,name,prefixes] of groups){
    const svg=iconToSVG(icon,{});icons[key]={body:svg.body,width:icon.width||data.width||16,height:icon.height||data.height||16};
   }
   const keys=Object.keys(icons);total+=keys.length;
-  const m=metadata[prefix];sets.push({prefix,name:m.name,count:keys.length,license:m.license,author:m.author,source:m.source,version:data.info?.version||null,...await writeSet(prefix,icons)});
+  const m=metadata[prefix];sets.push({prefix,name:m.name,count:keys.length,license:m.license,author:m.author,source:m.source,version:data.info?.version||null,...await writeSet(prefix,icons,data)});
   if(!samples.length)samples=selectSamples(icons,prefix);
  }
  if(id==='themify'||id==='devicons'){

@@ -34,6 +34,7 @@ export function SiteHeader({view,savedOnly,savedCount,onHome,onConsiderations,on
    <button aria-current={view==='collections'&&!savedOnly?'page':undefined} onClick={()=>navigate(onHome)}>Libraries</button>
    <button aria-current={view==='considerations'?'page':undefined} onClick={()=>navigate(onConsiderations)}>Considerations</button>
    <button aria-current={savedOnly?'page':undefined} onClick={()=>navigate(onSaved)}>Saved <span className="badge">{savedCount}</span></button>
+   <a href="https://icon-sets.iconify.design/" target="_blank" rel="noreferrer" onClick={()=>setOpen(false)}>Icon sources</a>
    <a href="https://github.com/Pythonidaer/master-icon-library" target="_blank" rel="noreferrer" onClick={()=>{setOpen(false);if(compact)trigger.current?.focus({preventScroll:true})}}>GitHub</a>
   </nav>
  </header>;
